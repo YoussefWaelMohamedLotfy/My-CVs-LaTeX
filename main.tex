@@ -1,0 +1,374 @@
+ \documentclass[10pt, letterpaper]{article} 
+
+ % Packages: 
+ \usepackage[ 
+ignoreheadfoot, % set margins without considering header and footer 
+top=1 cm, % seperation between body and page edge from the top 
+bottom=1 cm, % seperation between body and page edge from the bottom 
+left=1 cm, % seperation between body and page edge from the left 
+right=1 cm, % seperation between body and page edge from the right 
+footskip=0.5 cm, % seperation between body and footer 
+% showframe % for debugging
+ ]{geometry} % for adjusting page geometry 
+ \usepackage{titlesec} % for customizing section titles 
+ \usepackage{tabularx} % for making tables with fixed width columns 
+ \usepackage{array} % tabularx requires this 
+ \usepackage[dvipsnames]{xcolor} % for coloring text 
+ \definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color 
+ \usepackage{enumitem} % for customizing lists 
+ \usepackage{fontawesome5} % for using icons 
+ \usepackage{amsmath} % for math 
+ \usepackage[ 
+pdftitle={Youssef Wael Mohamed-Lotfy's CV}, 
+pdfauthor={Youssef Wael Mohamed-Lotfy}, 
+pdfcreator={LaTeX with RenderCV}, 
+colorlinks=true, 
+urlcolor=primaryColor 
+ ]{hyperref} % for links, metadata and bookmarks 
+ \usepackage[pscoord]{eso-pic} % for floating text on the page 
+ \usepackage{calc} % for calculating lengths 
+ \usepackage{bookmark} % for bookmarks 
+ \usepackage{lastpage} % for getting the total number of pages 
+ \usepackage{changepage} % for one column entries (adjustwidth environment) 
+ \usepackage{paracol} % for two and three column entries 
+ \usepackage{ifthen} % for conditional statements 
+ \usepackage{needspace} % for avoiding page brake right after the section title 
+ \usepackage{iftex} % check if engine is pdflatex, xetex or luatex 
+
+ % Ensure that generate pdf is machine readable/ATS parsable: 
+ \ifPDFTeX 
+\input{glyphtounicode} 
+\pdfgentounicode=1 
+% \usepackage[T1]{fontenc} % this breaks sb2nov 
+\usepackage[utf8]{inputenc} 
+\usepackage{lmodern} 
+ \fi 
+
+
+
+ % Some settings: 
+ \AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment 
+ \pagestyle{empty} % no header or footer 
+ \setcounter{secnumdepth}{0} % no section numbering 
+ \setlength{\parindent}{0pt} % no indentation 
+ \setlength{\topskip}{0pt} % no top skip 
+ \setlength{\columnsep}{0cm} % set column seperation 
+ \makeatletter 
+ \let\ps@customFooterStyle\ps@plain % Copy the plain style to customFooterStyle 
+ \patchcmd{\ps@customFooterStyle}{\thepage}{ 
+\color{gray}\textit{\small Youssef Wael Mohamed-Lotfy - Page \thepage{} of \pageref*{LastPage}} 
+ }{}{} % replace number by desired string 
+ \makeatother 
+ \pagestyle{customFooterStyle} 
+
+ \titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule] 
+
+ \titlespacing{\section}{ 
+% left space: 
+-1pt 
+ }{ 
+% top space: 
+0.3 cm 
+ }{ 
+% bottom space: 
+0.2 cm 
+ } % section title spacing 
+
+ \renewcommand\labelitemi{$\circ$} % custom bullet points 
+ \newenvironment{highlights}{ 
+\begin{itemize}[ 
+ topsep=0.10 cm, 
+ parsep=0.10 cm, 
+ partopsep=0pt, 
+ itemsep=0pt, 
+ leftmargin=0.4 cm + 10pt 
+] 
+ }{ 
+\end{itemize} 
+ } % new environment for highlights 
+
+ \newenvironment{highlightsforbulletentries}{ 
+\begin{itemize}[ 
+ topsep=0.10 cm, 
+ parsep=0.10 cm, 
+ partopsep=0pt, 
+ itemsep=0pt, 
+ leftmargin=10pt 
+] 
+ }{ 
+\end{itemize} 
+ } % new environment for highlights for bullet entries 
+
+
+ \newenvironment{onecolentry}{ 
+\begin{adjustwidth}{ 
+ 0.2 cm + 0.00001 cm 
+}{ 
+ 0.2 cm + 0.00001 cm 
+} 
+ }{ 
+\end{adjustwidth} 
+ } % new environment for one column entries 
+
+ \newenvironment{twocolentry}[2][]{ 
+\onecolentry 
+\def\secondColumn{#2} 
+\setcolumnwidth{\fill, 4.5 cm} 
+\begin{paracol}{2} 
+ }{ 
+\switchcolumn \raggedleft \secondColumn 
+\end{paracol} 
+\endonecolentry 
+ } % new environment for two column entries 
+
+ \newenvironment{header}{ 
+\setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5} 
+ }{ 
+\par\kern\topsep 
+ } % new environment for the header 
+
+ \newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>} 
+\AddToShipoutPictureFG*{% Add <stuff> to current page foreground 
+\put( 
+ \LenToUnit{\paperwidth-2 cm-0.2 cm+0.05cm}, 
+ \LenToUnit{\paperheight-1.0 cm} 
+){\vtop{{\null}\makebox[0pt][c]{ 
+ \small\color{gray}\textit{Last updated in July 2025}\hspace{\widthof{Last updated in July 2025}} 
+}}}% 
+}% 
+ }% 
+
+ % save the original href command in a new command: 
+ \let\hrefWithoutArrow\href 
+
+ % new command for external links: 
+ \renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}} 
+
+
+ \begin{document} 
+\newcommand{\AND}{\unskip 
+ \cleaders\copy\ANDbox\hskip\wd\ANDbox 
+ \ignorespaces 
+} 
+\newsavebox\ANDbox 
+\sbox\ANDbox{} 
+
+\begin{header} 
+ \textbf{\fontsize{24 pt}{24 pt}\selectfont Youssef Wael Mohamed-Lotfy} 
+
+ \vspace{0.3 cm} 
+
+ \normalsize 
+ \mbox{{\color{black}\footnotesize\faMapMarker*}\hspace*{0.13cm}Cairo, Egypt}% 
+ \kern 0.25 cm% 
+ \AND% 
+ \kern 0.25 cm% 
+ \mbox{\hrefWithoutArrow{mailto:youssefwael8@gmail.com}{\color{black}{\footnotesize\faEnvelope[regular]}\hspace*{0.13cm}youssefwael8@gmail.com}}% 
+ \kern 0.25 cm% 
+ \AND% 
+ \kern 0.25 cm% 
+ \mbox{\hrefWithoutArrow{tel:+201061134065}{\color{black}{\footnotesize\faPhone*}\hspace*{0.13cm}+201061134065}}% 
+ \kern 0.25 cm% 
+ \AND% 
+ \kern 0.25 cm% 
+ \mbox{\href{https://linkedin.com/in/youssefwaelmohamed-lotfy}{\color{black}{\footnotesize\faLinkedinIn}\hspace*{0.13cm}youssefwaelmohamed-lotfy}}% 
+ \kern 0.25 cm% 
+ \AND% 
+ \kern 0.25 cm% 
+ \mbox{\href{https://github.com/YoussefWaelMohamedLotfy}{\color{black}{\footnotesize\faGithub}\hspace*{0.13cm}YoussefWaelMohamedLotfy}}% 
+\end{header} 
+
+\vspace{0.3 cm - 0.3 cm} 
+
+
+\section{Profile} 
+
+
+ \begin{onecolentry} 
+I'm a Software Engineer with 4+ years of experience, building Applications for a better digital world. I mainly work using Microsoft's .NET ecosystem. Interested in Backend Development, Distributed Systems Designing, Computer Networks, Telecommunications and Sustainable Software Engineering, and I constantly improve myself in the trending technologies. 
+ \end{onecolentry} 
+
+ \vspace{0.2 cm} 
+
+ \begin{onecolentry} 
+Seeking to make an impact as a Senior Software Engineer at your established company. 
+ \end{onecolentry} 
+
+
+\section{Experience} 
+
+ \begin{twocolentry}{ 
+ \textit{Cairo, Egypt}
+ 
+ \textit{Sept 2023 – Present}} 
+\textbf{Software Developer} 
+ 
+\textit{Schneider Electric} 
+ \end{twocolentry} 
+
+ \vspace{0.10 cm} 
+ \begin{onecolentry} 
+\begin{highlights} 
+ \item Led projects for top technology customers like Equinix and Meta. 
+ \item Optimized a high-traffic background service, reducing memory consumption by 180\%. 
+ \item Introduced multiple AI assistants that boost productivity for customers and developers. 
+ \item Gained insights into Architectural Patterns, ASP.NET Core, XAML, WPF, .NET MAUI, and High Performance Programming. 
+\end{highlights} 
+ \end{onecolentry} 
+
+
+ \vspace{0.2 cm} 
+
+ \begin{twocolentry}{ 
+ \textit{Egypt}
+ 
+ \textit{Dec 2022 – Apr 2023}} 
+\textbf{.NET Fullstack Trainee} 
+ 
+\textit{Information Technology Institute (ITI)} 
+ \end{twocolentry} 
+
+ \vspace{0.10 cm} 
+ \begin{onecolentry} 
+\begin{highlights} 
+ \item Completed an intensive training program focused on Full-Stack Web Development with .NET Core. 
+ \item Gained deep knowledge of MVC, Web APIs, Clean Code principles, and Software Architectures. 
+\end{highlights} 
+ \end{onecolentry} 
+
+ \vspace{0.2 cm} 
+
+ \begin{twocolentry}{ 
+ \textit{London, United Kingdom}
+ 
+ \textit{Aug 2022 – Sept 2022}} 
+\textbf{Software Developer (Remote)} 
+ 
+\textit{Good Law Software} 
+ \end{twocolentry} 
+
+ \vspace{0.10 cm} 
+ \begin{onecolentry} 
+\begin{highlights} 
+ \item Enhanced the system's authentication server (IdentityServer) for full admin flexibility. 
+ \item Gained insights into OIDC/OAuth Standards, Keycloak, and Stripe Payments. 
+\end{highlights} 
+ \end{onecolentry} 
+
+ \vspace{0.2 cm} 
+
+ \begin{twocolentry}{ 
+ \textit{Cairo, Egypt}
+ 
+ \textit{Dec 2021 – Mar 2022}} 
+\textbf{Content Management Trainee} 
+ 
+\textit{Vodafone Foundation Egypt} 
+ \end{twocolentry} 
+
+ \vspace{0.10 cm} 
+ \begin{onecolentry} 
+\begin{highlights} 
+ \item Developed a 'Watchdog' for platform availability and an automated process for checking content availability. 
+ \item Supported a server migration project that improved scalability and performance of the Ta3limy Platform. 
+\end{highlights} 
+ \end{onecolentry} 
+
+
+\section{Education} 
+
+ \begin{twocolentry}{ 
+ \textit{Cairo, Egypt} 
+
+ \textit{2017 – 2021}} 
+\textbf{Ain Shams University} 
+
+\textit{Bachelor's Degree, Software Engineering Major} 
+ \end{twocolentry} 
+
+
+\section{Projects} 
+
+ \begin{twocolentry}{ 
+ \textit{Aug 2024 - Present}} 
+\textbf{AI Assistants Hub} 
+\textit{Schneider Electric} 
+ \end{twocolentry} 
+
+ \vspace{0.10 cm} 
+ \begin{onecolentry} 
+\begin{highlights} 
+ \item Built an internal hub for AI assistants (e.g., SQL query generation, RAG-based document chat) using open-source local LLMs to aid employees in daily tasks. 
+\end{highlights} 
+ \end{onecolentry} 
+
+ \vspace{0.2 cm} 
+ \begin{twocolentry}{ 
+ \textit{Oct 2023 - Dec 2023}} 
+\textbf{eCommerce-Microservices} 
+ \end{twocolentry} 
+
+ \vspace{0.10 cm} 
+ \begin{onecolentry} 
+\begin{highlights} 
+ \item Implemented a backend for an eCommerce platform using .NET, focusing on advanced concepts like resilience, orchestration, scalability, OpenTelemetry, service discovery, message brokers, and gRPC. 
+\end{highlights} 
+ \end{onecolentry} 
+
+ \vspace{0.2 cm} 
+ \begin{twocolentry}{ 
+ \textit{Sept 2020 - July 2021}} 
+\textbf{Entmaa Donation Services} 
+\textit{Graduation Project} 
+ \end{twocolentry} 
+
+ \vspace{0.10 cm} 
+ \begin{onecolentry} 
+\begin{highlights} 
+ \item Developed the backend and designed the Web API for a mobile application for online donation services. 
+\end{highlights} 
+ \end{onecolentry} 
+
+
+\section{Certificates} 
+
+ \begin{twocolentry}{\textit{}} 
+\textbf{Google Project Management} 
+\begin{highlights} 
+ \item Learned about project management, project lifecycles, and Agile workflows. 
+\end{highlights} 
+ \end{twocolentry} 
+
+ \vspace{0.1 cm} 
+ \begin{twocolentry}{\textit{}} 
+\textbf{Google IT Support} 
+\begin{highlights} 
+ \item Learned about enterprise IT infrastructure and management. 
+\end{highlights} 
+ \end{twocolentry} 
+
+\section{Technologies} 
+
+ \begin{onecolentry} 
+\textbf{Languages:} C\#, SQL, TypeScript, Python, XAML, HTML/CSS 
+ \end{onecolentry} 
+
+ \vspace{0.2 cm} 
+
+ \begin{onecolentry} 
+\textbf{Frameworks \& Platforms:} ASP.NET Core, Entity Framework Core, .NET MAUI, Blazor, SignalR, WPF, Angular 15+, .NET Aspire 
+ \end{onecolentry} 
+
+ \vspace{0.2 cm} 
+
+ \begin{onecolentry} 
+\textbf{Databases:} SQL Server, PostgreSQL, SQLite, MongoDB, Redis 
+ \end{onecolentry} 
+
+ \vspace{0.2 cm} 
+
+ \begin{onecolentry} 
+\textbf{Tools \& Concepts:} Docker, Azure, Git, Microservices, REST, gRPC, RabbitMQ, Kafka, Generative AI, Semantic Kernel, Serilog, NUnit/XUnit, Moq, Jira 
+ \end{onecolentry} 
+
+ \end{document} 
